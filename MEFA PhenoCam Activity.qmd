@@ -65,7 +65,7 @@ First, we need to open the required packages. A package is a collection of funct
 
 ```{r}
 library(phenocamapi)
-library(phenocamr)
+library(phenocamr) # pheno packages
 library(jpeg)
 library(purrr) 
 library(magick)
@@ -218,7 +218,7 @@ First, we'll download canopy greenness (GCC = green chromatic coordinate) timese
 GCC_timeseries <- get_pheno_ts(site = site_name, 
                                vegType = veg, 
                                roiID = ROI, 
-                               type = '3day')
+                               type = '3day') # or choose 1day
 
 # View table and available data (column names)
 View(GCC_timeseries) 
@@ -258,7 +258,7 @@ We can also download and plot the 50% seasonal transition dates (spring green-up
 # They will save in your designated directory (dir)
 download_phenocam(site = site_name,
                   veg_type = veg,
-                  frequency = 3,
+                  frequency = 3,  # consistant with the 3day
                   phenophase = TRUE,
                   out_dir = dir)
 
@@ -366,7 +366,7 @@ Next, we'll download some photos from your chosen site. Images are typically tak
 download_midday_images(site = site_name,
                        y = year, 
                        months = 1:12, 
-                       days = 15,
+                       days = 15, # one day in each month
                        download_dir = dir)
 ```
 
@@ -420,7 +420,7 @@ gif <- list.files(path = dir, pattern = "*.jpg", full.names = T) %>%
                  color = "black") %>%
   
   # Frames per second (higher number = faster, lower number = slower)
-  image_animate(fps=0.5) %>%
+  image_animate(fps=2) %>%
   
   # Designate file name & save to your directory
   image_write(paste0(dir,"/MonthlyGreenness_gif.gif")) 
